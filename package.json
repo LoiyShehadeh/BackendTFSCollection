@@ -4,10 +4,14 @@
   "description": "TFS Projects Portal API",
   "main": "dist/index.js",
   "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
     "dev": "tsx watch src/index.ts",
     "build": "tsc",
-    "start": "node dist/index.js"
+    "start": "node dist/index.js",
+    "render-build": "npm install --include=dev && npm run build"
   },
   "keywords": [],
   "author": "",
@@ -18,7 +22,8 @@
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
     "express-session": "^1.19.0",
-    "httpntlm": "^1.8.13"
+    "httpntlm": "^1.8.13",
+    "typescript": "^7.0.2"
   },
   "devDependencies": {
     "@types/better-sqlite3": "^9.6.0",
@@ -26,7 +31,6 @@
     "@types/express": "^5.0.6",
     "@types/express-session": "^1.19.0",
     "@types/node": "^26.2.0",
-    "tsx": "^4.23.11",
-    "typescript": "^7.0.2"
+    "tsx": "^4.23.11"
   }
 }

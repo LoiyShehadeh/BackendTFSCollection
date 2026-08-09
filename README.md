@@ -46,8 +46,13 @@ API: `http://localhost:3000`
 | GET | `/api/tfs/projects` | TFS projects for logged-in user |
 | CRUD | `/api/projects/...`, `/api/subprojects/...`, `/api/connections/...` | Sub-projects & DB connections |
 
-## Notes
+## Deploy on Render
 
-- Visitors sign in with their own `DOMAIN\username` credentials
-- Machine running this API must reach both TFS hosts
-- `.env`, `node_modules`, `data/`, and `dist/` are gitignored
+In the Render service settings:
+
+- **Build Command:** `npm run render-build`
+- **Start Command:** `npm start`
+
+Also set environment variables: `SESSION_SECRET`, `CORS_ORIGIN`, `TFS_2018_URL`, `TFS_2017_URL`, `TFS_AUTH_MODE`, `TFS_DEFAULT_DOMAIN`.
+
+Note: on-prem TFS hosts must be reachable from Render (usually they are not — internal network only).
