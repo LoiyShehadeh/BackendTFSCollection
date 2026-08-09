@@ -50,8 +50,8 @@ API: `http://localhost:3000`
 
 In the Render service settings:
 
-- **Build Command:** `npm run render-build`
-- **Start Command:** `npm start`
+- **Build Command:** `npm install` (or `npm run render-build`)
+- **Start Command:** `npm start`  ← must be this, not `node dist/index.js`
 
 Also set environment variables: `SESSION_SECRET`, `CORS_ORIGIN`, `TFS_2018_URL`, `TFS_2017_URL`, `TFS_AUTH_MODE`, `TFS_DEFAULT_DOMAIN`.
 
