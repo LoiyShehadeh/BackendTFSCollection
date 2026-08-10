@@ -9,13 +9,13 @@ import crudRoutes from './routes/crud.js';
 import { requireAuth } from './middleware/requireAuth.js';
 const app = express();
 /**
- * Allows configured CORS origin, local Angular ports, and Netlify deploy URLs.
+ * Allows configured CORS origins, local Angular ports, and Netlify hosts.
  */
 function isAllowedOrigin(origin) {
     if (!origin) {
         return true;
     }
-    if (origin === config.corsOrigin) {
+    if (origin === config.corsOrigin || config.corsOrigins.includes(origin)) {
         return true;
     }
     if (/^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/i.test(origin)) {

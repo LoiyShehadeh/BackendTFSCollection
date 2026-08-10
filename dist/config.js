@@ -9,6 +9,11 @@ dotenv.config();
 export const config = {
     port: Number(process.env.PORT) || 3000,
     corsOrigin: process.env.CORS_ORIGIN || 'http://localhost:4200',
+    /** Extra allowed frontend origins (comma-separated), e.g. Netlify URLs. */
+    corsOrigins: (process.env.CORS_ORIGINS || '')
+        .split(',')
+        .map((value) => value.trim())
+        .filter(Boolean),
     databasePath: process.env.DATABASE_PATH || path.join(process.cwd(), 'data', 'portal.db'),
     sessionSecret: process.env.SESSION_SECRET || crypto.randomBytes(32).toString('hex'),
     tfs: {
