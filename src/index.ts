@@ -11,7 +11,7 @@ import { requireAuth } from './middleware/requireAuth.js';
 const app = express();
 
 /**
- * Allows configured CORS origin plus any localhost / 127.0.0.1 port (Angular may pick a free port).
+ * Allows configured CORS origin, local Angular ports, and Netlify deploy URLs.
  */
 function isAllowedOrigin(origin: string | undefined): boolean {
   if (!origin) {
@@ -20,8 +20,17 @@ function isAllowedOrigin(origin: string | undefined): boolean {
   if (origin === config.corsOrigin) {
     return true;
   }
-  return /^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/i.test(origin);
+  if (/^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/i.test(origin)) {
+    return true;
+  }
+  // Netlify production + deploy-preview hosts
+  if (/^https:\/\/([a-z0-9-]+\.)*netlify\.app$/i.test(origin)) {
+    return true;
+  }
+  return false;
 }
+
+app.set('trust proxy', 1);
 
 app.use(
   cors({
