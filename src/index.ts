@@ -44,8 +44,8 @@ app.use(
     saveUninitialized: false,
     cookie: {
       httpOnly: true,
-      sameSite: 'lax',
-      secure: false,
+      sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+      secure: process.env.NODE_ENV === 'production',
       maxAge: 8 * 60 * 60 * 1000,
     },
   })
@@ -53,6 +53,20 @@ app.use(
 
 // Ensure DB is ready at startup
 getDb();
+
+/**
+ * Root health page — Render users open the service URL in a browser.
+ */
+app.get('/', (_req, res) => {
+  res.status(200).json({
+    name: 'TFS Projects Portal API',
+    status: 'ok',
+    health: '/api/health',
+    login: 'POST /api/auth/login',
+    projects: 'GET /api/tfs/projects',
+    note: 'This is the API only. Use the Angular frontend for the UI.',
+  });
+});
 
 app.get('/api/health', (_req, res) => {
   res.json({ status: 'ok' });
