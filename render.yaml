@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: backend-tfs-collection
+    runtime: node
+    plan: free
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_VERSION
+        value: "20"
+      - key: SESSION_SECRET
+        generateValue: true
+      - key: TFS_AUTH_MODE
+        value: ntlm
+      - key: CORS_ORIGIN
+        sync: false
+      - key: TFS_2018_URL
+        sync: false
+      - key: TFS_2017_URL
+        sync: false
+      - key: TFS_DEFAULT_DOMAIN
+        sync: false
